@@ -50,16 +50,16 @@ namespace Labb2_Threads_Async
         public void RandomProblem()
         {
             Random rnd = new Random();
-            var randomProblem = rnd.Next(1, 50);
+            var random = rnd.Next(1, 50);
 
-            if (randomProblem == 1)
+            if (random == 1)
             {
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine($"{Name} fick slut på bensin! Tankar i 15 sekunder...");
                 Console.ResetColor();
                 Thread.Sleep(15000);
             }
-            if (randomProblem > 1 && randomProblem <= 3)
+            if (random > 1 && random <= 3)
             {
                 Console.ForegroundColor = ConsoleColor.DarkYellow;
                 Console.WriteLine($"{Name} behöver byta däck, stannar i 10 sekunder...");
@@ -67,7 +67,7 @@ namespace Labb2_Threads_Async
                 Thread.Sleep(10000);
 
             }
-            if (randomProblem > 3 && randomProblem <= 8)
+            if (random > 3 && random <= 8)
             {
                 Console.ForegroundColor = ConsoleColor.DarkYellow;
                 Console.WriteLine($"{Name} fick fågel på vindrutan! Stannar 5 sekunder...");
@@ -75,14 +75,14 @@ namespace Labb2_Threads_Async
                 Thread.Sleep(5000);
 
             }
-            if (randomProblem > 8 && randomProblem <= 18)
+            if (random > 8 && random <= 18)
             {
                 Console.ForegroundColor = ConsoleColor.DarkYellow;
                 Console.WriteLine($"{Name} fick motorfel! Hastigheten på {Name} sänks med 1 km/h...");
                 Console.ResetColor();
                 Speed--;
             }
-            if (randomProblem > 18 && randomProblem <= 50)
+            if (random > 18 && random <= 50)
             {
                 Console.WriteLine($"{Name} har kommit {Distance:F2} km och kör i {Speed:F2} km/h");
             } 
