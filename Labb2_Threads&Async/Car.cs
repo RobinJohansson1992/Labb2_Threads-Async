@@ -6,51 +6,58 @@ namespace Labb2_Threads_Async
 {
     internal class Car
     {
-        public string Name { get; set; } 
-        public int Speed { get; set; } = 120;
-        public double Distance { get; set; } = 0.0;
+        public string Name { get; set; }
+        public double Speed { get; set; } = 120;
+        public double CarDistance { get; set; } = 0.0;
         public bool Finished { get; set; } = false;
         public double RaceDistance { get; set; } = 2.0;
-        public bool SomeOneWon { get; set; } = false;
+        public static bool Winner { get; set; } = false;
 
+        private Random _rnd = new Random();
 
         public Car(string name)
         {
             Name = name;
         }
 
-        public void Run()
+        public void RaceCar()
         {
-            Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine($"{Name} startar!");
-            Console.ResetColor();
             int SecondsCount = 0;
-            while (!Finished)
+            while (CarDistance < RaceDistance)
             {
                 Thread.Sleep(1000);
                 SecondsCount++;
-                Distance += Speed / 3600.0;
+                CarDistance += Speed / 3600.0;
 
-                if (SecondsCount % 10 == 0)
+                if (SecondsCount % 10 == 0) 
                 {
-                    RandomProblem();
-                }
-                if(Distance >= RaceDistance)
-                {
-                    Console.ForegroundColor = ConsoleColor.Green;
-                    Console.WriteLine($"{Name} är i mål!!");
-                    Console.ResetColor();
-                    Finished = true;
-                    Console.ReadKey();
+                    PossibleRandomProblem();
                 }
             }
-        }
-        
+            Finished = true;
+            if (!Winner)
+            {
+                Winner = true;
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine($"{Name} vann racet!! Kom i mål {DateTime.Now.ToString("HH:mm:ss")}");
+                Console.ResetColor();
+            }
+            else
+            {
+                Console.WriteLine($"{Name} är i mål! Kom i mål {DateTime.Now.ToString("HH:mm:ss")}");
+            }
 
-        public void RandomProblem()
+
+        }
+        public string PrintCarStatus()
         {
-            Random rnd = new Random();
-            var random = rnd.Next(1, 50);
+            return $"{Name}: {CarDistance:F2} km, {Speed:F2} km/h";
+        }
+
+        public void PossibleRandomProblem()
+        {
+            var random = _rnd.Next(1, 50);
 
             if (random == 1)
             {
@@ -82,10 +89,7 @@ namespace Labb2_Threads_Async
                 Console.ResetColor();
                 Speed--;
             }
-            if (random > 18 && random <= 50)
-            {
-                Console.WriteLine($"{Name} har kommit {Distance:F2} km och kör i {Speed:F2} km/h");
-            } 
+            
         }
     }
 }

@@ -4,11 +4,21 @@
     {
         static void Main(string[] args)
         {
-            Car car1 = new Car(name: "Blixten");
-            Car car2 = new Car(name: "Brum");
+            bool run = true;
+            while (run)
+            {
+                Race.RunRace();
 
-            new Thread(car1.Run).Start();
-            new Thread(car2.Run).Start();
+                Console.Clear();
+                Console.WriteLine("- Skriv race för att starta ett nytt race.");
+                Console.WriteLine("- Tryck enter för att avsluta.");
+
+                string userInput = Console.ReadLine();
+                if (userInput.ToLower() != "race")
+                {
+                    run = false;
+                }
+            }
         }
     }
 }
